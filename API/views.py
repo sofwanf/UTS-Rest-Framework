@@ -12,8 +12,8 @@ from .serializers import ProductSerializer, TransactionSerializer, CustomerSeria
 def Product_list(request, format=None):
 
     if request.method == 'GET':
-        Product = Product.objects.all()
-        serializer = ProductSerializer(Product, many=True)
+        product = Product.objects.all()
+        serializer = ProductSerializer(product, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
@@ -30,23 +30,23 @@ def Product_detail(request, pk, format=None):
     Retrieve, update or delete a code snippet.
     """
     try:
-        Product = Product.objects.get(pk=pk)
+        product = Product.objects.get(pk=pk)
     except Product.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = ProductSerializer(Product)
+        serializer = ProductSerializer(product)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = ProductSerializer(Product, data=request.data)
+        serializer = ProductSerializer(product, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        Product.delete()
+        product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -56,8 +56,8 @@ def Product_detail(request, pk, format=None):
 def Transaction_list(request, format=None):
 
     if request.method == 'GET':
-        Transaction = Transaction.objects.all()
-        serializer = TransactionSerializer(Transaction, many=True)
+        transaction = Transaction.objects.all()
+        serializer = TransactionSerializer(transaction, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
@@ -75,23 +75,23 @@ def Transaction_detail(request, pk, format=None):
     Retrieve, update or delete a code snippet.
     """
     try:
-        Transaction = Transaction.objects.get(pk=pk)
+        transaction = Transaction.objects.get(pk=pk)
     except Transaction.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = TransactionSerializer(Transaction)
+        serializer = TransactionSerializer(transaction)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = TransactionSerializer(Transaction, data=request.data)
+        serializer = TransactionSerializer(transaction, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        Transaction.delete()
+        transaction.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -101,8 +101,8 @@ def Transaction_detail(request, pk, format=None):
 def Customer_list(request, format=None):
 
     if request.method == 'GET':
-        Customer = Customer.objects.all()
-        serializer = CustomerSerializer(Customer, many=True)
+        customer = Customer.objects.all()
+        serializer = CustomerSerializer(customer, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
@@ -120,21 +120,21 @@ def Customer_detail(request, pk, format=None):
     Retrieve, update or delete a code snippet.
     """
     try:
-        Customer = Customer.objects.get(pk=pk)
+        customer = Customer.objects.get(pk=pk)
     except Customer.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = CustomerSerializer(Customer)
+        serializer = CustomerSerializer(customer)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = CustomerSerializer(Customer, data=request.data)
+        serializer = CustomerSerializer(customer, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        Customer.delete()
+        customer.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
